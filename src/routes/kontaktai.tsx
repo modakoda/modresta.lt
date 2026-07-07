@@ -1,0 +1,134 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { CONTACT_INFO } from "../lib/constants";
+
+
+export const Route = createFileRoute("/kontaktai")({
+  head: () => ({
+    meta: [
+      { title: "Kontaktai – susisiekite | Modresta" },
+      {
+        name: "description",
+        content:
+          "Susisiekite su Modresta komanda. Nemokama konsultacija ir preliminari sąmata per 3 darbo dienas.",
+      },
+      { property: "og:title", content: "Kontaktai | Modresta" },
+      {
+        property: "og:description",
+        content: "Nemokama konsultacija dėl individualių namų statybos Lietuvoje.",
+      },
+      { property: "og:url", content: "/kontaktai" },
+    ],
+    links: [{ rel: "canonical", href: "/kontaktai" }],
+  }),
+  component: ContactPage,
+});
+
+function ContactPage() {
+  return (
+    <section className="container-page relative overflow-hidden pt-20 pb-32 md:pt-32">
+      {/* Decorative architectural background element */}
+      <div className="absolute top-0 right-0 -z-10 h-[500px] w-[500px] rounded-full bg-accent/5 blur-3xl" />
+      <div className="absolute -top-10 left-1/3 -z-10 h-[300px] w-[300px] rounded-full bg-primary/5 blur-2xl" />
+
+      <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-20">
+        <div>
+          <p className="eyebrow">Kontaktai</p>
+          <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
+            Pakalbėkime apie jūsų <span className="text-accent">projektą</span>
+          </h1>
+          <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
+            Esame pasiruošę atsakyti į jūsų klausimus ir padėti įgyvendinti jūsų namo statybų viziją. Susisiekite tiesiogiai arba apsilankykite mūsų biure.
+          </p>
+
+          <div className="mt-10 hidden lg:block border-l-2 border-accent/20 pl-6">
+            <p className="text-sm font-medium text-muted-foreground">Nemokama konsultacija</p>
+            <p className="mt-1 text-sm text-foreground/80">
+              Atsakome per 1 darbo dieną ir paruošiame preliminarią sąmatą per 3 darbo dienas.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid gap-6 sm:grid-cols-2">
+          {/* Phone Card */}
+          <a
+            href={CONTACT_INFO.phone.href}
+            className="group flex flex-col justify-between rounded-2xl border border-border bg-card/60 p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:bg-card"
+          >
+            <div>
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+              </div>
+              <p className="mt-8 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Telefonas</p>
+              <p className="mt-2 font-display text-lg font-medium text-foreground tracking-tight group-hover:text-accent transition-colors">
+                {CONTACT_INFO.phone.display}
+              </p>
+            </div>
+            <span className="mt-4 text-xs font-medium text-accent opacity-0 transition-opacity group-hover:opacity-100">
+              Skambinti dabar →
+            </span>
+          </a>
+
+          {/* Email Card */}
+          <a
+            href={CONTACT_INFO.email.href}
+            className="group flex flex-col justify-between rounded-2xl border border-border bg-card/60 p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:bg-card"
+          >
+            <div>
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <p className="mt-8 text-xs font-semibold uppercase tracking-wider text-muted-foreground">El. paštas</p>
+              <p className="mt-2 font-display text-lg font-medium text-foreground tracking-tight group-hover:text-accent transition-colors break-all">
+                {CONTACT_INFO.email.display}
+              </p>
+            </div>
+            <span className="mt-4 text-xs font-medium text-accent opacity-0 transition-opacity group-hover:opacity-100">
+              Rašyti el. laišką →
+            </span>
+          </a>
+
+          {/* Office Card */}
+          <div className="flex flex-col justify-between rounded-2xl border border-border bg-card/40 p-6 shadow-soft transition-all duration-300 hover:border-accent/20">
+            <div>
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/5 text-accent">
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <p className="mt-8 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Biuras</p>
+              <p className="mt-2 font-display text-lg font-medium text-foreground">
+                Vilnius, Lietuva
+              </p>
+            </div>
+            <span className="mt-4 text-xs text-muted-foreground">
+              Susitikimai pagal susitarimą
+            </span>
+          </div>
+
+          {/* Working Hours Card */}
+          <div className="flex flex-col justify-between rounded-2xl border border-border bg-card/40 p-6 shadow-soft transition-all duration-300 hover:border-accent/20">
+            <div>
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/5 text-accent">
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <p className="mt-8 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Darbo laikas</p>
+              <p className="mt-2 font-display text-lg font-medium text-foreground">
+                I–V 8:00–18:00
+              </p>
+            </div>
+            <span className="mt-4 text-xs text-muted-foreground">
+              Savaitgaliais ilsimės
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
