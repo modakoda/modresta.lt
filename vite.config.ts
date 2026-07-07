@@ -11,6 +11,10 @@ export default defineConfig({
     tsconfigPaths({ projects: ["./tsconfig.json"] }),
     tanstackStart({
       server: { entry: "server" },
+      prerender: {
+        enabled: true,
+        routes: ["/"],
+      },
     }),
     react(),
   ],

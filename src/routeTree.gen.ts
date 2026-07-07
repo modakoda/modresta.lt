@@ -10,24 +10,12 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as ProjektaiRouteImport } from './routes/projektai'
-import { Route as PaslaugosRouteImport } from './routes/paslaugos'
 import { Route as KontaktaiRouteImport } from './routes/kontaktai'
 import { Route as IndexRouteImport } from './routes/index'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProjektaiRoute = ProjektaiRouteImport.update({
-  id: '/projektai',
-  path: '/projektai',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PaslaugosRoute = PaslaugosRouteImport.update({
-  id: '/paslaugos',
-  path: '/paslaugos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const KontaktaiRoute = KontaktaiRouteImport.update({
@@ -44,44 +32,30 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/kontaktai': typeof KontaktaiRoute
-  '/paslaugos': typeof PaslaugosRoute
-  '/projektai': typeof ProjektaiRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/kontaktai': typeof KontaktaiRoute
-  '/paslaugos': typeof PaslaugosRoute
-  '/projektai': typeof ProjektaiRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/kontaktai': typeof KontaktaiRoute
-  '/paslaugos': typeof PaslaugosRoute
-  '/projektai': typeof ProjektaiRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/kontaktai' | '/paslaugos' | '/projektai' | '/sitemap.xml'
+  fullPaths: '/' | '/kontaktai' | '/sitemap.xml'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/kontaktai' | '/paslaugos' | '/projektai' | '/sitemap.xml'
-  id:
-    | '__root__'
-    | '/'
-    | '/kontaktai'
-    | '/paslaugos'
-    | '/projektai'
-    | '/sitemap.xml'
+  to: '/' | '/kontaktai' | '/sitemap.xml'
+  id: '__root__' | '/' | '/kontaktai' | '/sitemap.xml'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   KontaktaiRoute: typeof KontaktaiRoute
-  PaslaugosRoute: typeof PaslaugosRoute
-  ProjektaiRoute: typeof ProjektaiRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
@@ -92,20 +66,6 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/projektai': {
-      id: '/projektai'
-      path: '/projektai'
-      fullPath: '/projektai'
-      preLoaderRoute: typeof ProjektaiRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/paslaugos': {
-      id: '/paslaugos'
-      path: '/paslaugos'
-      fullPath: '/paslaugos'
-      preLoaderRoute: typeof PaslaugosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/kontaktai': {
@@ -128,8 +88,6 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   KontaktaiRoute: KontaktaiRoute,
-  PaslaugosRoute: PaslaugosRoute,
-  ProjektaiRoute: ProjektaiRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport

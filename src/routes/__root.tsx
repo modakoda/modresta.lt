@@ -6,6 +6,7 @@ import {
   useRouter,
   HeadContent,
   Scripts,
+  useLocation,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
@@ -76,7 +77,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Statome kokybiškus individualius namus visoje Lietuvoje. Fiksuota kaina, aiškūs terminai ir atsakomybė nuo pamatų iki raktų.",
+          "Statome kokybiškus individualius namus visoje Lietuvoje. Skaidri kainodara, suderinti terminai ir visapusiškas projektų valdymas.",
       },
       { name: "author", content: "Modresta" },
       { property: "og:site_name", content: "Modresta" },
@@ -85,13 +86,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         property: "og:description",
         content:
-          "Patikimas rangovas Lietuvoje. Nuo projekto iki raktų — vienas partneris, aiški kaina, garantija.",
+          "Patikimas partneris Lietuvoje. Pilnas statybos ciklas — suderintas biudžetas ir darbų kokybės garantija.",
       },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "theme-color", content: "#faf8f5" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
   }),
@@ -117,6 +119,19 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const el = document.getElementById(location.hash);
+      if (el) {
+        const timer = setTimeout(() => {
+          el.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [location.hash, location.pathname]);
 
   return (
     <QueryClientProvider client={queryClient}>

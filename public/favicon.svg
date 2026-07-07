@@ -1,0 +1,38 @@
+<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    :root {
+      --primary: #3b2c23; /* Espresso color matching light theme */
+      --accent: #8b7355;  /* Clay accent */
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary: #f0ebe3; /* Light sand color matching dark theme */
+        --accent: #c9b99a;  /* Sand-deep accent */
+      }
+    }
+  </style>
+  <!-- structural M framework — outer shell -->
+  <path
+    d="M18 82V26L50 12L82 26V82"
+    stroke="var(--primary)"
+    stroke-width="8"
+    stroke-linejoin="bevel"
+    stroke-linecap="round"
+  />
+  <!-- inner clay beam / foundation -->
+  <path
+    d="M18 82H34V42L50 32L66 42V82H82"
+    stroke="var(--accent)"
+    stroke-width="8"
+    stroke-linejoin="bevel"
+    stroke-linecap="round"
+  />
+  <!-- central vertical axis — dashed datum -->
+  <path
+    d="M50 32V82"
+    stroke="var(--primary)"
+    stroke-width="4"
+    stroke-dasharray="6 5"
+    opacity="0.65"
+  />
+</svg>

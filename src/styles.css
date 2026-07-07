@@ -51,20 +51,20 @@
 :root {
   --radius: 0.5rem;
   /* Warm Sand palette */
-  --background: oklch(0.985 0.007 80);       /* #faf8f5 */
-  --foreground: oklch(0.24 0.02 60);         /* deep warm brown */
+  --background: oklch(0.985 0.007 80); /* #faf8f5 */
+  --foreground: oklch(0.24 0.02 60); /* deep warm brown */
   --card: oklch(1 0 0);
   --card-foreground: var(--foreground);
   --popover: oklch(1 0 0);
   --popover-foreground: var(--foreground);
 
-  --primary: oklch(0.42 0.035 60);           /* deep espresso for strong CTAs */
+  --primary: oklch(0.42 0.035 60); /* deep espresso for strong CTAs */
   --primary-foreground: oklch(0.985 0.007 80);
-  --secondary: oklch(0.945 0.015 80);        /* #f0ebe3 */
+  --secondary: oklch(0.945 0.015 80); /* #f0ebe3 */
   --secondary-foreground: var(--foreground);
   --muted: oklch(0.945 0.015 80);
   --muted-foreground: oklch(0.5 0.02 60);
-  --accent: oklch(0.55 0.045 55);            /* #8b7355 clay accent */
+  --accent: oklch(0.55 0.045 55); /* #8b7355 clay accent */
   --accent-foreground: oklch(0.985 0.007 80);
 
   --destructive: oklch(0.55 0.2 27);
@@ -73,9 +73,9 @@
   --input: oklch(0.9 0.015 75);
   --ring: oklch(0.55 0.045 55);
 
-  --sand: oklch(0.945 0.015 80);             /* #f0ebe3 */
-  --sand-deep: oklch(0.82 0.03 80);          /* #c9b99a */
-  --clay: oklch(0.55 0.045 55);              /* #8b7355 */
+  --sand: oklch(0.945 0.015 80); /* #f0ebe3 */
+  --sand-deep: oklch(0.82 0.03 80); /* #c9b99a */
+  --clay: oklch(0.55 0.045 55); /* #8b7355 */
 }
 
 @layer base {
@@ -92,7 +92,11 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
-  h1, h2, h3, h4, h5 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
     font-family: var(--font-display);
     letter-spacing: -0.02em;
     font-weight: 600;
@@ -104,7 +108,9 @@
   margin-inline: auto;
   max-width: 1200px;
   padding-inline: 1.25rem;
-  @media (min-width: 768px) { padding-inline: 2rem; }
+  @media (min-width: 768px) {
+    padding-inline: 2rem;
+  }
 }
 
 @utility eyebrow {
@@ -114,4 +120,63 @@
   text-transform: uppercase;
   color: var(--clay);
   font-weight: 500;
+}
+
+@utility grid-pattern {
+  background-image: radial-gradient(var(--color-border) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0.98);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@utility animate-fade-in {
+  animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@utility animate-scale-up {
+  animation: scaleUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@utility animate-draw-line {
+  animation: draw 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@utility animate-float-badge {
+  animation: float 4s ease-in-out infinite;
 }

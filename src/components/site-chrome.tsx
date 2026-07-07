@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
+import { useState } from "react";
 import { CONTACT_INFO } from "../lib/constants";
-
 
 function BrandMark({ className = "" }: { className?: string }) {
   return (
@@ -49,82 +49,130 @@ function BrandMark({ className = "" }: { className?: string }) {
   );
 }
 
-
-const nav = [
-  { to: "/paslaugos", label: "Paslaugos" },
-  { to: "/projektai", label: "Projektai" },
-  { to: "/kontaktai", label: "Kontaktai" },
-] as const;
-
 export function SiteHeader() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const navLinks = [
+    { label: "Paslaugos", hash: "paslaugos" },
+    { label: "Sąmata", hash: "skaiciuokle" },
+    { label: "Procesas", hash: "procesas" },
+    { label: "Kontaktai", hash: "kontaktai" },
+  ];
+
   return (
-    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
-      <div className="container-page grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 py-4 md:flex md:justify-between">
-        <Link to="/" className="group flex min-w-0 items-end gap-3">
+    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-md">
+      <div className="container-page flex items-center justify-between py-4">
+        <Link
+          to="/"
+          onClick={() => setMobileMenuOpen(false)}
+          className="group flex min-w-0 items-end gap-3"
+        >
           <BrandMark className="h-9 w-9 transition-transform duration-300 group-hover:-rotate-3" />
           <span className="flex min-w-0 flex-col leading-none">
             <span className="truncate font-display text-lg font-semibold tracking-tight">
               modresta<span className="text-accent">.lt</span>
             </span>
-            <span className="mt-1 hidden text-[10px] font-medium uppercase tracking-[0.2em] text-muted-foreground sm:inline">
+            <span className="mt-1 block text-[10px] font-medium uppercase tracking-[0.2em] text-muted-foreground">
               Namų statyba
             </span>
           </span>
         </Link>
 
+        {/* Desktop Nav */}
         <nav className="hidden items-center gap-1 md:flex" aria-label="Pagrindinė navigacija">
-          {nav.map((n) => (
+          {navLinks.slice(0, 4).map((link) => (
             <Link
-              key={n.to}
-              to={n.to}
-              className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-              activeProps={{ className: "text-foreground bg-secondary" }}
-              
+              key={link.hash}
+              to="/"
+              hash={link.hash}
+              className="text-xs font-semibold uppercase tracking-wider text-muted-foreground hover:text-foreground transition-all duration-200 py-1.5 px-3.5 rounded-full hover:bg-secondary/60"
             >
-              {n.label}
+              {link.label}
             </Link>
           ))}
           <Link
-            to="/kontaktai"
-            className="ml-2 inline-flex h-9 items-center rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            to="/"
+            hash="kontaktai"
+            className="ml-4 inline-flex h-9 items-center rounded-xl bg-primary px-4 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow-soft transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/95"
           >
             Konsultacija
           </Link>
         </nav>
 
-        {/* mobile CTA */}
-        <Link
-          to="/kontaktai"
-          className="inline-flex h-9 items-center rounded-md bg-primary px-3 text-sm font-medium text-primary-foreground md:hidden"
-        >
-          Konsultacija
-        </Link>
+        {/* Mobile Navigation Trigger & Consultation Button */}
+        <div className="flex items-center gap-2 md:hidden">
+          <Link
+            to="/"
+            hash="kontaktai"
+            onClick={() => setMobileMenuOpen(false)}
+            className="inline-flex h-9 items-center rounded-xl bg-primary px-3.5 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow-soft"
+          >
+            Konsultacija
+          </Link>
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="flex h-9 w-9 items-center justify-center rounded-xl border border-border bg-card text-foreground cursor-pointer transition-colors hover:bg-secondary/40"
+            aria-expanded={mobileMenuOpen}
+            aria-label="Atidaryti meniu"
+          >
+            {mobileMenuOpen ? (
+              <svg
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2.5"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2.5"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
+              </svg>
+            )}
+          </button>
+        </div>
       </div>
 
-      {/* mobile scrollable nav */}
-      <nav
-        aria-label="Mobili navigacija"
-        className="container-page -mt-1 flex gap-1 overflow-x-auto pb-3 md:hidden"
-      >
-        {nav.map((n) => (
-          <Link
-            key={n.to}
-            to={n.to}
-            className="shrink-0 rounded-full border border-border px-3 py-1.5 text-xs text-muted-foreground"
-            activeProps={{ className: "bg-foreground text-background border-foreground" }}
-            
-          >
-            {n.label}
-          </Link>
-        ))}
-      </nav>
+      {/* Mobile Menu Dropdown */}
+      {mobileMenuOpen && (
+        <div className="md:hidden border-t border-border bg-card/95 backdrop-blur-md animate-fade-in">
+          <nav className="container-page py-6 flex flex-col gap-4">
+            {navLinks.map((link) => (
+              <Link
+                key={link.hash}
+                to="/"
+                hash={link.hash}
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-sm font-semibold uppercase tracking-wider text-muted-foreground hover:text-foreground py-2 border-b border-border/40 last:border-b-0"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
 
 export function SiteFooter() {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyCode = () => {
+    navigator.clipboard.writeText(CONTACT_INFO.companyCode);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
-    <footer className="mt-24 border-t border-border bg-secondary/50">
+    <footer className="mt-4 md:mt-8 border-t border-border bg-secondary/50">
       <div className="container-page grid gap-10 py-14 md:grid-cols-4">
         <div className="md:col-span-2">
           <div className="flex items-center gap-2.5">
@@ -134,21 +182,19 @@ export function SiteFooter() {
             </span>
           </div>
           <p className="mt-4 max-w-sm text-sm text-muted-foreground">
-            Statome individualius namus visoje Lietuvoje. Fiksuota kaina, aiškūs terminai,
-            atsakomybė nuo pamatų iki raktų.
+            Statome individualius namus visoje Lietuvoje. Skaidri kainodara, suderinti terminai,
+            visapusiškas projektų valdymas.
           </p>
         </div>
 
         <div>
           <p className="eyebrow">Navigacija</p>
           <ul className="mt-4 space-y-2 text-sm">
-            {nav.map((n) => (
-              <li key={n.to}>
-                <Link to={n.to} className="text-muted-foreground hover:text-foreground">
-                  {n.label}
-                </Link>
-              </li>
-            ))}
+            <li>
+              <Link to="/" hash="kontaktai" className="text-muted-foreground hover:text-foreground">
+                Konsultacija
+              </Link>
+            </li>
           </ul>
         </div>
 
@@ -172,8 +218,44 @@ export function SiteFooter() {
       </div>
       <div className="border-t border-border">
         <div className="container-page flex flex-col justify-between gap-2 py-6 text-xs text-muted-foreground sm:flex-row">
-          <p>© {new Date().getFullYear()} Modresta. Visos teisės saugomos.</p>
-          <p>Statybos rangovas · Įm. kodas 300000000</p>
+          <p>
+            © {new Date().getFullYear()} {CONTACT_INFO.companyName}. Visos teisės saugomos.
+          </p>
+          <p className="flex items-center gap-1.5 flex-wrap">
+            <span>Įmonės kodas</span>
+            <button
+              onClick={handleCopyCode}
+              className="cursor-pointer inline-flex items-center gap-1 rounded bg-secondary/80 px-1.5 py-0.5 font-mono text-xs font-medium text-foreground transition-all duration-200 hover:bg-accent/10 hover:text-accent focus:outline-none focus:ring-1 focus:ring-accent/30"
+              title="Kopijuoti įmonės kodą"
+            >
+              {CONTACT_INFO.companyCode}
+              {copied ? (
+                <svg
+                  className="h-3 w-3 text-emerald-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              ) : (
+                <svg
+                  className="h-3 w-3 opacity-60 group-hover:opacity-100"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"
+                  />
+                </svg>
+              )}
+            </button>
+          </p>
         </div>
       </div>
     </footer>
