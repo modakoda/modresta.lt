@@ -217,10 +217,23 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-border">
-        <div className="container-page flex flex-col justify-between gap-2 py-6 text-xs text-muted-foreground sm:flex-row">
-          <p>
-            © {new Date().getFullYear()} {CONTACT_INFO.companyName}. Visos teisės saugomos.
-          </p>
+        <div className="container-page flex flex-col justify-between items-start gap-3 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center">
+          <div className="flex flex-col gap-1.5 sm:flex-row sm:items-center sm:gap-6">
+            <p>
+              © {new Date().getFullYear()} {CONTACT_INFO.companyName}. Visos teisės saugomos.
+            </p>
+            <p>
+              Sukurta:{" "}
+              <a
+                href="https://modakoda.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground hover:text-accent transition-colors font-medium underline underline-offset-2 decoration-border hover:decoration-accent"
+              >
+                modakoda.com
+              </a>
+            </p>
+          </div>
           <p className="flex items-center gap-1.5 flex-wrap">
             <span>Įmonės kodas</span>
             <button
