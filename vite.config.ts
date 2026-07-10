@@ -15,6 +15,10 @@ export default defineConfig({
         enabled: true,
         routes: ["/"],
       },
+      sitemap: {
+        enabled: true,
+        host: "https://modresta.lt",
+      },
     }),
     react(),
   ],
