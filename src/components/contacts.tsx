@@ -1,14 +1,4 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
 import { CONTACT_INFO } from "../lib/constants";
-
-export const Route = createFileRoute("/kontaktai")({
-  beforeLoad: () => {
-    throw redirect({
-      to: "/",
-      hash: "kontaktai",
-    });
-  },
-});
 
 export function ContactsSection() {
   return (

@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import heroImg from "@/assets/hero-house.jpg";
-import { ContactsSection } from "./kontaktai";
+import { ContactsSection } from "../components/contacts";
 import { Calculator } from "../components/calculator";
 import { ProcessTimeline } from "../components/process-timeline";
 

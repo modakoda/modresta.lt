@@ -9,14 +9,8 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as KontaktaiRouteImport } from './routes/kontaktai'
 import { Route as IndexRouteImport } from './routes/index'
 
-const KontaktaiRoute = KontaktaiRouteImport.update({
-  id: '/kontaktai',
-  path: '/kontaktai',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -25,39 +19,28 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/kontaktai': typeof KontaktaiRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/kontaktai': typeof KontaktaiRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/kontaktai': typeof KontaktaiRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/kontaktai'
+  fullPaths: '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/kontaktai'
-  id: '__root__' | '/' | '/kontaktai'
+  to: '/'
+  id: '__root__' | '/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  KontaktaiRoute: typeof KontaktaiRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/kontaktai': {
-      id: '/kontaktai'
-      path: '/kontaktai'
-      fullPath: '/kontaktai'
-      preLoaderRoute: typeof KontaktaiRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -70,7 +53,6 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  KontaktaiRoute: KontaktaiRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
