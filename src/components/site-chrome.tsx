@@ -163,12 +163,12 @@ export function SiteHeader() {
 }
 
 export function SiteFooter() {
-  const [copied, setCopied] = useState(false);
+  const [copiedType, setCopiedType] = useState<"code" | "vat" | null>(null);
 
-  const handleCopyCode = () => {
-    navigator.clipboard.writeText(CONTACT_INFO.companyCode);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleCopy = (text: string, type: "code" | "vat") => {
+    navigator.clipboard.writeText(text);
+    setCopiedType(type);
+    setTimeout(() => setCopiedType(null), 2000);
   };
 
   return (
@@ -237,12 +237,45 @@ export function SiteFooter() {
           <p className="flex items-center gap-1.5 flex-wrap">
             <span>Įmonės kodas</span>
             <button
-              onClick={handleCopyCode}
+              onClick={() => handleCopy(CONTACT_INFO.companyCode, "code")}
               className="cursor-pointer inline-flex items-center gap-1 rounded bg-secondary/80 px-1.5 py-0.5 font-mono text-xs font-medium text-foreground transition-all duration-200 hover:bg-accent/10 hover:text-accent focus:outline-none focus:ring-1 focus:ring-accent/30"
               title="Kopijuoti įmonės kodą"
             >
               {CONTACT_INFO.companyCode}
-              {copied ? (
+              {copiedType === "code" ? (
+                <svg
+                  className="h-3 w-3 text-emerald-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              ) : (
+                <svg
+                  className="h-3 w-3 opacity-60 group-hover:opacity-100"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"
+                  />
+                </svg>
+              )}
+            </button>
+            <span className="ml-1 sm:ml-2">PVM mokėtojo kodas</span>
+            <button
+              onClick={() => handleCopy(CONTACT_INFO.vatCode, "vat")}
+              className="cursor-pointer inline-flex items-center gap-1 rounded bg-secondary/80 px-1.5 py-0.5 font-mono text-xs font-medium text-foreground transition-all duration-200 hover:bg-accent/10 hover:text-accent focus:outline-none focus:ring-1 focus:ring-accent/30"
+              title="Kopijuoti PVM mokėtojo kodą"
+            >
+              {CONTACT_INFO.vatCode}
+              {copiedType === "vat" ? (
                 <svg
                   className="h-3 w-3 text-emerald-500"
                   fill="none"
