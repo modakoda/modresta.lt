@@ -3,25 +3,42 @@ import heroImg from "@/assets/hero-house.jpg";
 import { ContactsSection } from "../components/contacts";
 import { Calculator } from "../components/calculator";
 import { ProcessTimeline } from "../components/process-timeline";
+import { CONTACT_INFO } from "../lib/constants";
+
+const SITE_URL = "https://modresta.lt";
+const TITLE = "Modresta – mūrinių individualių namų statyba Lietuvoje";
+const DESCRIPTION =
+  "Mūrinių individualių namų statyba visoje Lietuvoje: pamatai, mūras, apdaila. Skaidri sąmata, suderinti terminai, darbų garantija. Apskaičiuokite kainą internetu.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Modresta – individualių namų statyba Lietuvoje" },
+      { title: TITLE },
+      { name: "description", content: DESCRIPTION },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESCRIPTION },
+      { property: "og:url", content: `${SITE_URL}/` },
+      { property: "og:locale", content: "lt_LT" },
+      { property: "og:image", content: SITE_URL + heroImg },
+      { property: "og:image:width", content: "1920" },
+      { property: "og:image:height", content: "1280" },
       {
-        name: "description",
-        content:
-          "Individualių namų statyba. Skaidri kainodara, suderinti terminai, profesionalus statybų valdymas.",
+        "script:ld+json": {
+          "@context": "https://schema.org",
+          "@type": "GeneralContractor",
+          name: "Modresta",
+          legalName: CONTACT_INFO.companyName,
+          url: `${SITE_URL}/`,
+          image: SITE_URL + heroImg,
+          description: DESCRIPTION,
+          telephone: CONTACT_INFO.phone.display,
+          email: CONTACT_INFO.email.display,
+          vatID: CONTACT_INFO.vatCode,
+          areaServed: { "@type": "Country", name: "Lietuva" },
+        },
       },
-      { property: "og:title", content: "Modresta – individualių namų statyba" },
-      {
-        property: "og:description",
-        content:
-          "Vienas partneris nuo projekto iki apdailos. Skaidri kainodara, suderinti terminai.",
-      },
-      { property: "og:url", content: "/" },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
   }),
   component: HomePage,
 });
