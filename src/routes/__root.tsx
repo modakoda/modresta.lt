@@ -90,7 +90,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Patikimas partneris Lietuvoje. Pilnas statybos ciklas — suderintas biudžetas ir darbų kokybės garantija.",
       },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "theme-color", content: "#faf8f5" },
+      { name: "theme-color", content: "#f7f6f4" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

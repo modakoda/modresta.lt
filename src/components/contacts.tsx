@@ -6,10 +6,6 @@ export function ContactsSection() {
       id="kontaktai"
       className="container-page relative overflow-hidden pt-12 pb-2 md:pt-16 md:pb-4 scroll-mt-20"
     >
-      {/* Decorative architectural background element */}
-      <div className="absolute top-0 right-0 -z-10 h-[500px] w-[500px] rounded-full bg-accent/5 blur-3xl" />
-      <div className="absolute -top-10 left-1/3 -z-10 h-[300px] w-[300px] rounded-full bg-primary/5 blur-2xl opacity-60" />
-
       <div className="grid gap-12 lg:grid-cols-[1fr_1.3fr] lg:gap-20">
         <div className="flex flex-col justify-start lg:pt-2">
           <p className="eyebrow">Kontaktai</p>

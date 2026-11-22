@@ -39,7 +39,7 @@ export function Calculator() {
 
   return (
     <section id="skaiciuokle" className="container-page py-24 md:py-32 scroll-mt-20">
-      <div className="flex flex-col items-center text-center">
+      <div>
         <p className="eyebrow">Sąmatos skaičiuoklė</p>
         <h2 className="mt-4 font-display text-4xl font-semibold tracking-tight sm:text-5xl">
           Preliminarus kainos skaičiavimas.
